@@ -44,12 +44,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC1TwUKYIbTMw41Jz-kdQPkqQwG_avKryI",
-  authDomain: "sitepointbooks-969ea.firebaseapp.com",
-  projectId: "sitepointbooks-969ea",
-  storageBucket: "sitepointbooks-969ea.appspot.com",
-  messagingSenderId: "776775702563",
-  appId: "1:776775702563:web:61c04d9c7bfbf0c3563996"
+  apiKey: 'YOUR_API_KEY',
+  authDomain: 'YOUR_AUTH_DOMAIN',
+  projectId: 'YOUR_PROJECT_ID',
+  storageBucket: 'YOUR_STORAGE_BUCKET',
+  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
+  appId: 'YOUR_APP_ID',
 };
 
 // Initialize Firebase
