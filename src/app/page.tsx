@@ -3,8 +3,15 @@ import { db } from "@/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
+interface Book {
+  Cover: string;
+  Title: string;
+  Description: string;
+}
+
 const Home = () => {
-  const [authorData, setAuthorData] = useState([]);
+  const [authorData, setAuthorData] = useState<Book[]>([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -12,11 +19,11 @@ const Home = () => {
         const querySnapshot = await getDocs(collectionRef);
 
         if (querySnapshot.empty) {
-          console.log("No documents found in 'author' collection.");
+          console.log("No documents found in 'books' collection.");
         } else {
-          const data = [];
+          const data: Book[] = [];
           querySnapshot.forEach((doc) => {
-            data.push(doc.data());
+            data.push(doc.data() as Book);
           });
           console.log(data);
           setAuthorData(data);
@@ -29,21 +36,20 @@ const Home = () => {
     fetchData();
   }, []);
 
-    return (
-      <div>
-        <h1>Author Data:</h1>
-        <ul>
-          {authorData.map((book, index) => (
-            <li key={index}>
-              <img src={book.Cover} alt={`Cover for ${book.Name}`} />
-              <p><strong>Title:</strong> {book.Title}</p>
-              <p><strong>Description:</strong> {book.Description}</p>
-              
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
+  return (
+    <div>
+      <h1>Author Data:</h1>
+      <ul>
+        {authorData.map((book, index) => (
+          <li key={index}>
+            <img src={book.Cover} alt={`Cover for ${book.Title}`} />
+            <p><strong>Title:</strong> {book.Title}</p>
+            <p><strong>Description:</strong> {book.Description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default Home;
