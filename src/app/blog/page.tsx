@@ -1,34 +1,45 @@
+"use client"
 import PostCard from "@/components/postCard/postCard";
 import styles from "./blog.module.css";
-// import { getPosts } from "@/lib/data";
+import { useEffect, useState } from "react";
 
-// FETCH DATA WITH AN API
-const getData = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+interface Post {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
 
-  if (!res.ok) {
-    throw new Error("Something went wrong");
-  }
-
-  return res.json();
-};
-
-const BlogPage = async () => {
+const BlogPage = () => {
+  const [posts, setPosts] = useState<Post[]>([]);
 
   // FETCH DATA WITH AN API
-  const posts = await getData();
-//   console.log(posts);
+  const getData = async () => {
+    try {
+      const res = await fetch("https://jsonplaceholder.typicode.com/posts");
 
-  // FETCH DATA WITHOUT AN API
-//   const posts = await getPosts();
+      if (!res.ok) {
+        throw new Error("Something went wrong");
+      }
+
+      const data = await res.json();
+      setPosts(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div className={styles.container}>
-        {posts.map((post) => (
-            <div className={styles.post} key={post.id}>
-            <PostCard post={post} />
-            </div>
-        ))}
+      {posts.map((post) => (
+        <div className={styles.post} key={post.id}>
+          <PostCard post={post} />
+        </div>
+      ))}
     </div>
   );
 };

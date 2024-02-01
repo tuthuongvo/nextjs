@@ -31,8 +31,8 @@ const ContactPage = () => {
           <textarea
             name=""
             id=""
-            cols="30"
-            rows="10"
+            cols={30}
+            rows={10}
             placeholder="Message"
           ></textarea>
           <button>Send</button>
