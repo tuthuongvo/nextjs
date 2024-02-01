@@ -7,7 +7,7 @@ import { Suspense } from "react";
 // import { getPost } from "@/lib/data";
 
 // FETCH DATA WITH AN API
-const getData = async (slug) => {
+const getData = async (slug: string) => {
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
 
   if (!res.ok) {
@@ -28,7 +28,7 @@ const getData = async (slug) => {
 //   };
 // };
 
-const SinglePostPage = async ({params}) => {
+const SinglePostPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
 
   // FETCH DATA WITH AN API
